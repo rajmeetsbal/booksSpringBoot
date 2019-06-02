@@ -1,0 +1,63 @@
+<!-- Search form -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="searchBox">
+  <select class="form-control" [(ngModel)]="searchBy" id='searchTypeSelect'>
+    <option value='title'>Title</option>
+    <option value='author'>Author</option>
+  </select>
+  <input style.display="inline" [(ngModel)]="searchString" (keyup)="getSearchedBooks(this.value)" class="form-control" type="text" placeholder="Search" aria-label="Search">
+  
+</div>
+
+<div class="bookListing">
+    <mat-spinner class="loadingSpinner" id="loadSpin" ></mat-spinner>
+
+    <!-- <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+            <mat-panel-description>
+              ABC def
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Self aware panel
+              </mat-panel-title>
+              <mat-panel-description>
+                ABC def
+                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>I'm visible because I am open</p>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+      
+
+    <mat-list>
+        <app-book-list-item [book]="book" *ngFor="let book of bookList"></app-book-list-item>
+        <!-- <mat-list-item class="list-itm" *ngFor="let book of bookList">
+          <div class="book-list-item">
+              <span matLine>
+                 <font color="White" size="5">{{book.title}}</font> by <font color="brown" size="3">{{book.author_name[0]}}</font>
+                 
+                  <app-details-opener [book] = "book"></app-details-opener> 
+                 <button class="detailsButton btn" (click)="openDialog()">Details</button>
+              </span> 
+                
+          </div>
+        </mat-list-item> -->
+      </mat-list>
+    
+</div>

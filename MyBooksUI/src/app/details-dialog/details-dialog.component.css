@@ -1,0 +1,20 @@
+.closeBtn{
+    display: block;
+    float: right;
+}
+
+.bookTitle{
+    font-size: 12;
+    font-family: 'Times New Roman';
+}
+
+.bookAuthor{
+    font-size: 9;
+    font-family: 'Courier New', Courier, monospace;
+    color: brown;
+    display: block;
+}
+
+.mat-dialog-container{
+    background-color: beige;
+}

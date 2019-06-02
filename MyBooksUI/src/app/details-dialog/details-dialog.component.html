@@ -1,0 +1,24 @@
+<span class="bookTitle">
+   Title : {{book.title}}
+</span>
+<span class="bookAuthor">
+    Author : {{book.author_name}}
+</span>
+<hr>
+<p>{{book.first_sentence}}</p>
+<div class="bookPublisher">
+    First Published in : {{book.first_publish_year}}
+</div>
+<br>
+<div class="bookPublisher">
+    Published At : {{book.publish_place}}
+</div>
+<div class="bookPublisher">
+    Genre : {{book.type}}
+</div>
+<div class="bookPublisher">
+    Publisher : {{book.publisher}}
+</div>
+<div>
+  <button class="closeBtn btn" (click)="closeDialog()">Close</button>
+</div>
