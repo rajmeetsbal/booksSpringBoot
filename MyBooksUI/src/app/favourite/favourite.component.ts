@@ -6,13 +6,12 @@ import {} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { BookDetails } from '../bookDetails';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
-
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-favourite',
+  templateUrl: './favourite.component.html',
+  styleUrls: ['./favourite.component.css']
 })
-export class SearchComponent implements OnInit {
+export class FavouriteComponent implements OnInit {
   searchString : string;
   searchBy : string;
   isbnId : string;
@@ -30,7 +29,22 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById("loadSpin").style.display = "none";
+      document.getElementById("loadSpin").style.display = "block";
+      this.bookService.getFavouriteBooks("rajmeet").subscribe(bookListResponse => {
+        // console.log("resp using obser :  "+bookListResponse);
+        // bookListResponse.docs.forEach(function(item){
+        //   if(item)
+        // });
+        this.bookList = bookListResponse;
+        console.log("isbn returned : " + this.bookList[0].isbn);
+        console.log("title data returned : " + this.bookList[0].title);
+        console.log("author data returned : " + this.bookList[0].author_name);
+        document.getElementById("loadSpin").style.display = "none";
+      },
+      error => {
+        this.errMessage = error.message;
+      });
+    
   }
 
   // openDialog(): void {
@@ -44,28 +58,6 @@ export class SearchComponent implements OnInit {
   //     this.animal = result;
   //   });
   // }
-
-  getSearchedBooks(){
-    console.log(this.searchString);
-    document.getElementById("selectTitle").setAttribute("selected","true");
-    if(this.searchString.length > 3){
-      document.getElementById("loadSpin").style.display = "block";
-      this.bookService.getBooks(this.searchString,this.searchBy).subscribe(bookListResponse => {
-        // console.log("resp using obser :  "+bookListResponse);
-        // bookListResponse.docs.forEach(function(item){
-        //   if(item)
-        // });
-        this.bookList = bookListResponse.docs;
-        console.log("isbn returned : " + this.bookList[0].isbn);
-        console.log("title data returned : " + this.bookList[0].title);
-        console.log("author data returned : " + this.bookList[0].author_name);
-        document.getElementById("loadSpin").style.display = "none";
-      },
-      error => {
-        this.errMessage = error.message;
-      });
-    }
-  }
 
   getBookDetails(){
     console.log(this.isbnId);
@@ -96,4 +88,5 @@ export class SearchComponent implements OnInit {
   }
 
 
-  }
+
+}

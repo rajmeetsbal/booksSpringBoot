@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../book';
 import { BookService} from '../services/BookService';
 
 import {} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { BookDetails } from '../bookDetails';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
+import { RecommendedBook } from '../recommendedBook';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-recommended',
+  templateUrl: './recommended.component.html',
+  styleUrls: ['./recommended.component.css']
 })
-export class SearchComponent implements OnInit {
+export class RecommendedComponent implements OnInit {
+
   searchString : string;
   searchBy : string;
   isbnId : string;
-  book : Book;
-  bookList : Array<Book>;
+  book : RecommendedBook;
+  bookList : Array<RecommendedBook>;
   bookDetails : BookDetails;
   errMessage: string;
   loadingIconIsVisible: boolean;
@@ -25,12 +26,28 @@ export class SearchComponent implements OnInit {
   
 
   constructor(private bookService: BookService, private dialog : MatDialog) {
-    this.book = new Book();
+    this.book = new RecommendedBook();
     this.bookList = [];
   }
 
   ngOnInit() {
-    document.getElementById("loadSpin").style.display = "none";
+    // document.getElementById("loadSpin").style.display = "none";
+    //this.getRecommendedBooks();
+    this.bookService.getRecommendedBooks().subscribe(bookListResponse => {
+      console.log("resp using obser :  "+bookListResponse);
+      // bookListResponse.docs.forEach(function(item){
+      //   if(item)
+      // });
+      this.bookList = bookListResponse;
+      // console.log("isbn returned : " + this.bookList[0].isbn);
+      console.log("title data returned : " + this.bookList[0].bookTitle);
+      console.log("author data returned : " + this.bookList[0].bookAuthor);
+      document.getElementById("loadSpin").style.display = "none";
+    },
+    error => {
+      console.log("errror :  "+error.message);
+      this.errMessage = error.message;
+    });
   }
 
   // openDialog(): void {
@@ -45,26 +62,24 @@ export class SearchComponent implements OnInit {
   //   });
   // }
 
-  getSearchedBooks(){
-    console.log(this.searchString);
-    document.getElementById("selectTitle").setAttribute("selected","true");
-    if(this.searchString.length > 3){
-      document.getElementById("loadSpin").style.display = "block";
-      this.bookService.getBooks(this.searchString,this.searchBy).subscribe(bookListResponse => {
-        // console.log("resp using obser :  "+bookListResponse);
+  getRecommendedBooks(){
+    console.log("called getRecommendedBooks");
+      // document.getElementById("loadSpin").style.display = "block";
+      this.bookService.getRecommendedBooks().subscribe(bookListResponse => {
+        console.log("resp using obser :  "+bookListResponse);
         // bookListResponse.docs.forEach(function(item){
         //   if(item)
         // });
-        this.bookList = bookListResponse.docs;
-        console.log("isbn returned : " + this.bookList[0].isbn);
-        console.log("title data returned : " + this.bookList[0].title);
-        console.log("author data returned : " + this.bookList[0].author_name);
-        document.getElementById("loadSpin").style.display = "none";
+        this.bookList = bookListResponse;
+        // console.log("isbn returned : " + this.bookList[0].isbn);
+        console.log("title data returned : " + this.bookList[0].bookTitle);
+        console.log("author data returned : " + this.bookList[0].bookAuthor);
+        // document.getElementById("loadSpin").style.display = "none";
       },
       error => {
         this.errMessage = error.message;
       });
-    }
+    
   }
 
   getBookDetails(){
@@ -96,4 +111,4 @@ export class SearchComponent implements OnInit {
   }
 
 
-  }
+}

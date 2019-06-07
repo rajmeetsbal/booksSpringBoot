@@ -1,0 +1,89 @@
+input {
+    margin: 5px;
+  }
+  .searchBox {
+    width: 50%;
+    margin:0 auto;
+    padding:10px;
+  }
+  
+  .searchTypeSelector{
+      width: 19%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  
+  .searchInput{
+      width: 80%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  
+  }
+  
+  .book-list-item{
+    width: 100%;
+    margin:0 auto;
+    padding:1px;
+    border: 1px solid rgb(60, 70, 70);
+    border-radius: 5px;
+    background-color: rgb(122, 113, 129);
+  }
+  .bookListing{
+    width: 75%;
+    margin:0 auto;
+    padding:1px;
+  }
+  
+  .mat-list-item-content{
+    margin:20px;
+    width:75%;
+  }
+  
+  .bookTitle{
+    color:white;
+    font-size: 1.5em;
+    /* width: 50%; */
+  }
+  
+  .bookAuthor{
+    color: brown;
+    font-size: 1em;
+  }
+  
+  .loadingSpinner{
+    width: 75%;
+    margin:0 auto;
+    padding:1px;
+  }
+  
+  .detailsButton{
+    float:right;
+    margin:10px;
+  }
+  
+  .mat-list-item{
+    margin-bottom: 2em;
+  }
+  .form-control{
+    margin: 10px;
+  }
+
+  
+
+  app-favourites-list-item{
+    margin: 1em;
+  }

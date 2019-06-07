@@ -1,0 +1,23 @@
+.login-content {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+	padding-top: 50px;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	flex-flow:column nowrap;
+	align-items: center;
+	}
+
+.input-field {
+	width: 100%;
+}
+
+.header {
+	text-align: center;
+}
+
+.login-user{
+	margin-right: 15px;
+}
