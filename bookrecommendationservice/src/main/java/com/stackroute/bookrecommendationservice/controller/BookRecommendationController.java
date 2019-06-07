@@ -25,30 +25,14 @@ import com.stackroute.bookrecommendationservice.service.RecommendationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/*
- * As in this assignment, we are working with creating RESTful web service, hence annotate
- * the class with @RestController annotation.A class annotated with @Controller annotation
- * has handler methods which returns a view. However, if we use @ResponseBody annotation along
- * with @Controller annotation, it will return the data directly in a serialized 
- * format. Starting from Spring 4 and above, we can use @RestController annotation which 
- * is equivalent to using @Controller and @ResposeBody annotation
- * 
- * @CrossOrigin,@EnableFeignClients and @RibbonClient needs to be added 
- * 
- */
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:8765", maxAge = 3600)
+@CrossOrigin(origins= {"http://localhost:4200", "http://localhost:4200/*"})
 @EnableFeignClients("com.stackroute.bookrecommendationservice.controller")
 @RibbonClient(name="book-recomendations")
 @Api
 public class BookRecommendationController {
-
-	/*
-	 * Autowiring should be implemented for the BookRecomendationService. (Use
-	 * Constructor-based autowiring) Please note that we should not create any
-	 * object using the new keyword
-	 */
 	private RecommendationService recommendationService;
 	
 	@Autowired
@@ -81,6 +65,16 @@ public class BookRecommendationController {
 		} catch (RecommendationsNotFoundException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+	}
+	
+	@ApiOperation(value = "Get all recommended books list: /api/v1/recommended")
+	@GetMapping("/recommended")
+	public ResponseEntity<?> getAllRecommended() {
+		try {
+			return new ResponseEntity<>(this.recommendationService.getAllRecommended(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	//@GetMapping("/")

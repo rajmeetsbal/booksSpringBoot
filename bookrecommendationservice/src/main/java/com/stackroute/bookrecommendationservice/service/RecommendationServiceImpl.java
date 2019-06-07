@@ -58,6 +58,11 @@ public class RecommendationServiceImpl implements RecommendationService {
 		return bookRecomendation;
 		
 	}
+
+	@Override
+	public List<BookRecomendation> getAllRecommended() throws RecommendationsNotFoundException {
+		return bookRecomendationRepository.findAll();
+	}
 	
 	
 }
