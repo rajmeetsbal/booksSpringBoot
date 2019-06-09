@@ -12,15 +12,6 @@ import com.stackroute.bookrecommendationservice.exception.RecommendationsNotFoun
 import com.stackroute.bookrecommendationservice.model.BookRecomendation;
 import com.stackroute.bookrecommendationservice.repository.BookRecomendationRepository;
 
-/*
-* Service classes are used here to implement additional business logic/validation 
-* This class has to be annotated with @Service annotation.
-* @Service - It is a specialization of the component annotation. It doesn't currently 
-* provide any additional behavior over the @Component annotation, but it's a good idea 
-* to use @Service over @Component in service-layer classes because it specifies intent 
-* better. Additionally, tool support and additional behavior might rely on it in the 
-* future.
-* */
 @Service
 public class RecommendationServiceImpl implements RecommendationService {
 

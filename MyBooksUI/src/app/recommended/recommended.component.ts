@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService} from '../services/BookService';
+import { BookService} from '../services/bookService';
 
 import {} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';

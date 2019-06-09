@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../book';
+import { BookService } from '../services/bookService';
 import { MatDialog } from '@angular/material';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
+import { FavouriteBooks } from '../favouriteBooks';
 
 @Component({
   selector: 'app-book-list-item',
@@ -13,9 +15,28 @@ export class BookListItemComponent implements OnInit {
   @Input()
   book : Book;
 
-  constructor(private dialog : MatDialog) { }
+  fb : FavouriteBooks;
+  errorMessage: string;
+  constructor(private dialog : MatDialog, private bookService: BookService) {
+     this.fb = new FavouriteBooks();
+   }
 
   ngOnInit() {
+  }
+
+  addToFavs() {
+    // if (this.note.text && this.note.title) {
+      // FavouriteBooks fb = new FavouriteBooks();
+      this.fb.userId = "rajmeet";
+      console.log("this.fb.userId "+this.fb.userId);
+      this.fb.favouritesList[0] = this.book;
+      this.bookService.addFav(this.fb).subscribe(addedBook => {
+      }, error => {
+        this.errorMessage = error.message;
+      });
+    // } else {
+    //     this.errorMessage = 'Title and Text both are required fields';
+    // }
   }
 
   

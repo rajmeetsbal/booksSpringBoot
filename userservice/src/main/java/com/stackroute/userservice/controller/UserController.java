@@ -7,10 +7,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 //import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins= {"http://localhost:4200", "http://localhost:4200/*"})
-//@EnableFeignClients("com.stackroute.userservice.controller")
+@EnableFeignClients("com.stackroute.userservice.controller")
 @RibbonClient(name="userservice")
 @Api
 public class UserController {
@@ -79,6 +81,13 @@ public class UserController {
    			}
    		
    		return new ResponseEntity<>(map, HttpStatus.OK);
+   	}
+	
+	@ApiOperation(value = "get all users: /api/v1/users")
+	@GetMapping("/users")
+   	public ResponseEntity<?> getAllUsers() throws UserNotFoundException {
+		List<String> userIds = this.userService.findAllUserIds(); 		
+   		return new ResponseEntity<>(userIds, HttpStatus.OK);
    	}
 	
     // Generate JWT token

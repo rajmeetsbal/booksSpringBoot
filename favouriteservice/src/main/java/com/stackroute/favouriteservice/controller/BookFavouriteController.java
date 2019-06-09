@@ -64,6 +64,8 @@ public class BookFavouriteController {
 	@PostMapping("/favourites")
 	public ResponseEntity<?> createFavourite(@RequestBody BookFavourite favourite) throws Exception {
 		try {
+			System.out.println("favourite "+favourite);
+			System.out.println("data : "+favourite.getId() + " " + favourite.getFavouritesList() );
 			BookFavourite createdFavourite = this.favouriteService.createFavourite(favourite);
 			return new ResponseEntity<>(createdFavourite, HttpStatus.CREATED);
 		} catch (FavouriteNotCreatedException e) {
