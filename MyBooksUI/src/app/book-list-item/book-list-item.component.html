@@ -1,9 +1,10 @@
-<mat-list-item class="list-itm">
+<mat-list-item class="list-itm" *ngIf="book.isbn !== undefined">
     <div class="book-list-item">
         <span matLine>
            <font color="White" size="5">{{book.title}}</font> by <font color="brown" size="3">{{book.author_name[0]}}</font>
            <!-- <span>{{book.first_sentence}}</span> -->
            <!-- <app-details-opener [book] = "book"></app-details-opener> -->
+           <!-- <span>{{book.isbn}}</span> -->
            <button class="detailsButton btn" (click)="openDialog()">Details</button>
            <button class="detailsButton btn" (click)="addToFavs()">Add to favourites</button>
         </span> 

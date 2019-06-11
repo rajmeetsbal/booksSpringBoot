@@ -3,7 +3,8 @@ import { Book } from '../book';
 import { BookService } from '../services/bookService';
 import { MatDialog } from '@angular/material';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
-import { FavouriteBooks } from '../favouriteBooks';
+import { FavouriteBook } from '../favouriteBook';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-book-list-item',
@@ -15,10 +16,11 @@ export class BookListItemComponent implements OnInit {
   @Input()
   book : Book;
 
-  fb : FavouriteBooks;
+  fb : FavouriteBook;
   errorMessage: string;
-  constructor(private dialog : MatDialog, private bookService: BookService) {
-     this.fb = new FavouriteBooks();
+  
+  constructor(private dialog : MatDialog, private bookService: BookService, private authService: AuthenticationService) {
+     this.fb = new FavouriteBook();
    }
 
   ngOnInit() {
@@ -27,11 +29,15 @@ export class BookListItemComponent implements OnInit {
   addToFavs() {
     // if (this.note.text && this.note.title) {
       // FavouriteBooks fb = new FavouriteBooks();
-      this.fb.userId = "rajmeet";
-      console.log("this.fb.userId "+this.fb.userId);
-      this.fb.favouritesList[0] = this.book;
-      // this.fb.favouritesList[0] = {"title":this.book.title,"author_name":this.book.author_name[0]};
-      this.bookService.addFav(this.fb).subscribe(addedBook => {
+      // console.log("user " + this.authService.loggedInUser);
+      // this.fb.userId = this.authService.loggedInUser;
+      // console.log("this.fb.userId "+this.fb.userId);
+      if(this.book.isbn){
+        this.book.id=this.book.isbn[0];
+      }
+      // this.fb.book = this.book;
+      // console.log("this.fb.book "+this.fb.book);
+      this.bookService.addFav(this.authService.loggedInUser,this.book).subscribe(addedBook => {
       }, error => {
         this.errorMessage = error.message;
       });

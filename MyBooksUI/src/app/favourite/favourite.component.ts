@@ -6,6 +6,7 @@ import {} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { BookDetails } from '../bookDetails';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
+import { AuthenticationService } from '../services/authentication.service';
 @Component({
   selector: 'app-favourite',
   templateUrl: './favourite.component.html',
@@ -23,14 +24,14 @@ export class FavouriteComponent implements OnInit {
   panelOpenState : boolean;
   
 
-  constructor(private bookService: BookService, private dialog : MatDialog) {
+  constructor(private bookService: BookService, private dialog : MatDialog, private authService: AuthenticationService) {
     this.book = new Book();
     this.bookList = [];
   }
 
   ngOnInit() {
       document.getElementById("loadSpin").style.display = "block";
-      this.bookService.getFavouriteBooks("rajmeet").subscribe(bookListResponse => {
+      this.bookService.getFavouriteBooks(this.authService.loggedInUser).subscribe(bookListResponse => {
         // console.log("resp using obser :  "+bookListResponse);
         // bookListResponse.docs.forEach(function(item){
         //   if(item)

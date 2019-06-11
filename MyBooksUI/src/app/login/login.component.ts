@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 			if (data['token']) {
 				this.authService.setToken(data['token']);
 				this.authService.loggedIn = true;
+				this.authService.loggedInUser = data['loggedInUser']
 				this.router.navigate(['/search']);
 			}
 		});

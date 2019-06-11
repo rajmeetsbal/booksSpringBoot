@@ -62,12 +62,15 @@ public class BookFavouriteController {
 	}
 	
 	@ApiOperation(value = "Create favourite using post api url: /api/v1/favourites")
-	@PostMapping("/favourites")
-	public ResponseEntity<?> createFavourite(@RequestBody UserBook favourite) throws Exception {
+	@PostMapping("/favourites/{id}")
+	public ResponseEntity<?> createFavourite(@PathVariable("id") String userId,@RequestBody Book book) throws Exception {
 		try {
-			System.out.println("favourite "+favourite);
+			System.out.println("favourite "+book);
 //			System.out.println("data : "+favourite.getId() + " " + favourite.getFavouritesList() );
-			BookFavourite createdFavourite = this.favouriteService.createFavourite(favourite);
+			UserBook ub = new UserBook();
+			ub.setId(userId);
+			ub.setBook(book);
+			BookFavourite createdFavourite = this.favouriteService.createFavourite(ub);
 			return new ResponseEntity<>(createdFavourite, HttpStatus.CREATED);
 		} catch (FavouriteNotCreatedException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);

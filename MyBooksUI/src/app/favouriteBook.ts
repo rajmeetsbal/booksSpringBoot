@@ -1,10 +1,10 @@
 import { Book } from "./book";
 
-export class FavouriteBooks{
+export class FavouriteBook{
     userId : string;
-    favouritesList : Array<Book>;
+    book : Book;
     
     constructor() {
-      this.favouritesList = [];
+      this.book = new Book();
       }
 }

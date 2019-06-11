@@ -1,5 +1,5 @@
 export class Book{
-    // id : number;
+    id : number;
     title : string;
     author_name : Array<string>;
     isbn : Array<string>;

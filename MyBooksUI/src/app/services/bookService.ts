@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Book } from '../book';
 import { BookSearchResult } from '../bookSearchResult';
 import { BookDetails } from '../bookDetails';
 import { RecommendedBook } from '../recommendedBook';
@@ -10,7 +9,6 @@ import { Book } from '../book';
 import { tap } from 'rxjs/operators';
 import { FavouriteBooks } from '../favouriteBooks';
 import { AuthenticationService} from '../services/authentication.service';
-// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable({
     providedIn:'root'
@@ -50,14 +48,12 @@ export class BookService{
     }
 
     
-  addFav(fav: FavouriteBooks): Observable<FavouriteBooks> {
-    return this.http.post<FavouriteBooks>('http://localhost:8765/book-favourites/api/v1/favourites/'+this.userId, fav, {
+  addFav(userId: string, book:Book): Observable<Book> {
+    return this.http.post<Book>('http://localhost:8765/book-favourites/api/v1/favourites/'+userId, book, {
     headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`)
     }).pipe(
       tap(addedFav => {
           console.log("piping... at bookservice");
-    //   this.notes.push(addedNote);
-    //   this.favSubject.next(this.notes);
     }));
   }
     

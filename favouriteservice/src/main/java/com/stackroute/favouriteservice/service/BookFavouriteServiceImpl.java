@@ -49,7 +49,7 @@ public class BookFavouriteServiceImpl implements BookFavouriteService {
 			if(createdRecomendation != null) {
 				return createdRecomendation;
 			} else {
-				throw new FavouriteNotCreatedException("Recommendation not created.");
+				throw new FavouriteNotCreatedException("Favourite not created.");
 			}
 		}else {
 			List<Book> favouritesList = new ArrayList();
@@ -61,7 +61,7 @@ public class BookFavouriteServiceImpl implements BookFavouriteService {
 			if(createdFav != null) {
 				return createdFav;
 			} else {
-				throw new FavouriteNotCreatedException("Recommendation not created.");
+				throw new FavouriteNotCreatedException("Favourite not created.");
 			}
 		}
 	}

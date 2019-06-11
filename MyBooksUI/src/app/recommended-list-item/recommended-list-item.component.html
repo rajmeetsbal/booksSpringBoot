@@ -4,7 +4,8 @@
            <font color="White" size="5">{{book.bookTitle}}</font> by <font color="brown" size="3">{{book.bookAuthor}}</font>
            <!-- <span>{{book.first_sentence}}</span> -->
            <!-- <app-details-opener [book] = "book"></app-details-opener> -->
-           <button class="detailsButton btn" (click)="openDialog()">Details</button>
+           <!-- <button class="detailsButton btn" (click)="openDialog()">Details</button> -->
+           <span class="recommendedBy"><font color="White" >Recommended by</font> <font class="recommendCount" color="brown" >{{book.recommendedBy.length}}</font> <font color="White" >people</font></span>
         </span> 
           
     </div>

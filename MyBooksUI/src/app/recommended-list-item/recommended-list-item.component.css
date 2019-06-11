@@ -17,3 +17,14 @@
 .mat-list-item{
     margin-bottom: 2em;
   }
+
+ .recommendedBy{
+   float: right;
+   margin-top: 1em;
+   margin-right: 1em;
+
+ } 
+
+ .recommendCount{
+   margin: 2px;
+ }

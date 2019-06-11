@@ -13,6 +13,7 @@ export const TOKEN_NAME: string = 'jwt_token';
 export class AuthenticationService {
 
 	loggedIn:boolean = false;
+	loggedInUser:string;
 	token: string;
 
 	constructor(private httpClient: HttpClient) {

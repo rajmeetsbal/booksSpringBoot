@@ -56,9 +56,10 @@ export class SearchComponent implements OnInit {
         //   if(item)
         // });
         this.bookList = bookListResponse.docs;
-        console.log("isbn returned : " + this.bookList[0].isbn);
-        console.log("title data returned : " + this.bookList[0].title);
-        console.log("author data returned : " + this.bookList[0].author_name);
+        // console.log("this booklist : " + this.bookList.)
+        // console.log("isbn returned : " + this.bookList[0].isbn);
+        // console.log("title data returned : " + this.bookList[0].title);
+        // console.log("author data returned : " + this.bookList[0].author_name);
         document.getElementById("loadSpin").style.display = "none";
       },
       error => {

@@ -42,6 +42,7 @@ export class RecommendedComponent implements OnInit {
       // console.log("isbn returned : " + this.bookList[0].isbn);
       console.log("title data returned : " + this.bookList[0].bookTitle);
       console.log("author data returned : " + this.bookList[0].bookAuthor);
+      console.log("author data returned : " + this.bookList[0].recommendedBy.length);
       document.getElementById("loadSpin").style.display = "none";
     },
     error => {

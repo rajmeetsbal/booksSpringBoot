@@ -20,7 +20,7 @@ public class Book {
 	 * 
 	 */
 	@Id
-	private int id;
+	private long id;
 	private String title;
 	private String[] author_name;
 	
@@ -39,11 +39,11 @@ public class Book {
 		this.author_name[0] = author_name;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
