@@ -22,6 +22,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import com.stackroute.favouriteservice.exception.FavouriteNotCreatedException;
 import com.stackroute.favouriteservice.model.Book;
 import com.stackroute.favouriteservice.model.BookFavourite;
+import com.stackroute.favouriteservice.model.BookRecomendation;
 import com.stackroute.favouriteservice.model.UserBook;
 import com.stackroute.favouriteservice.service.BookFavouriteService;
 
@@ -53,6 +54,10 @@ public class BookFavouriteController {
 	 * Constructor-based autowiring) Please note that we should not create any
 	 * object using the new keyword
 	 */
+
+	@Autowired
+	private RecommendBookProxy proxy;
+	
 	private BookFavouriteService favouriteService;
 	
 	@Autowired
@@ -71,6 +76,13 @@ public class BookFavouriteController {
 			ub.setId(userId);
 			ub.setBook(book);
 			BookFavourite createdFavourite = this.favouriteService.createFavourite(ub);
+			BookRecomendation br = new BookRecomendation();
+			br.setId(new Long(book.getId()).toString());
+			br.setBookTitle(book.getTitle());
+			br.setBookAuthor(book.getAuthor_name()[0]);
+			String[] recommenders = {userId};
+			br.setRecommendedBy(recommenders);
+			proxy.recommendBook(br);
 			return new ResponseEntity<>(createdFavourite, HttpStatus.CREATED);
 		} catch (FavouriteNotCreatedException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);

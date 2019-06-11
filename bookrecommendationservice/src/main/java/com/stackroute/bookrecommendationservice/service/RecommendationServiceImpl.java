@@ -26,11 +26,30 @@ public class RecommendationServiceImpl implements RecommendationService {
 	@Override
 	public BookRecomendation createRecommendation(BookRecomendation bookRecomendation)
 			throws AlreadyRecommendedException, RecommendationNotCreatedException {
-		BookRecomendation createdRecomendation = bookRecomendationRepository.insert(bookRecomendation);
-		if(createdRecomendation != null) {
-			return createdRecomendation;
-		} else {
-			throw new RecommendationNotCreatedException("Recommendation not created.");
+		Optional<BookRecomendation> br = bookRecomendationRepository.findById(bookRecomendation.getId());
+		if(br.isPresent()) {
+			BookRecomendation alreadyRecommended = br.get();
+			List<String> recs = alreadyRecommended.getRecommendedBy();
+			String recommendedBy = bookRecomendation.getRecommendedBy().get(0);
+			if(recs.contains(recommendedBy)){
+				throw new AlreadyRecommendedException("you already recommended this book");
+			} else {
+				recs.add(recommendedBy);
+				alreadyRecommended.setRecommendedBy(recs);
+				BookRecomendation createdRecomendation = bookRecomendationRepository.save(alreadyRecommended);
+				if(createdRecomendation != null) {
+					return createdRecomendation;
+				} else {
+					throw new RecommendationNotCreatedException("Recommendation not created.");
+				}
+			}
+		}else {
+			BookRecomendation createdRecomendation = bookRecomendationRepository.insert(bookRecomendation);
+			if(createdRecomendation != null) {
+				return createdRecomendation;
+			} else {
+				throw new RecommendationNotCreatedException("Recommendation not created.");
+			}
 		}
 	}
 

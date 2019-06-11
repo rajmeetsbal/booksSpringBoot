@@ -1,7 +1,6 @@
-package com.stackroute.bookrecommendationservice.model;
+package com.stackroute.favouriteservice.model;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,14 +16,14 @@ public class BookRecomendation {
 	private String id;
 	private String bookTitle;
 	private String bookAuthor;
-	private List<String> recommendedBy;
+	private String[] recommendedBy;
 	 
 	public BookRecomendation() {
 	}
 	
 	
 	
-	public BookRecomendation(String id, String bookTitle, String bookAuthor, List recommendedBy) {
+	public BookRecomendation(String id, String bookTitle, String bookAuthor, String[] recommendedBy) {
 		super();
 		this.id = id;
 		this.bookTitle = bookTitle;
@@ -70,28 +69,15 @@ public class BookRecomendation {
 
 
 
-	public List<String> getRecommendedBy() {
+	public String[] getRecommendedBy() {
 		return recommendedBy;
 	}
 
 
 
-	public void setRecommendedBy(List<String> recommendedBy) {
+	public void setRecommendedBy(String[] recommendedBy) {
 		this.recommendedBy = recommendedBy;
 	}
-
-	
-
-//
-//	public String[] getRecommendedBy() {
-//		return recommendedBy;
-//	}
-//
-//
-//
-//	public void setRecommendedBy(String[] recommendedBy) {
-//		this.recommendedBy = recommendedBy;
-//	}
 	
 	
 
