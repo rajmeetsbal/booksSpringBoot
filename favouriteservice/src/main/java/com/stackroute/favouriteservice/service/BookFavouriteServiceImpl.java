@@ -1,6 +1,7 @@
 package com.stackroute.favouriteservice.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import com.stackroute.favouriteservice.exception.AlreadyFavouriteException;
 import com.stackroute.favouriteservice.exception.FavouriteNotCreatedException;
 import com.stackroute.favouriteservice.model.Book;
 import com.stackroute.favouriteservice.model.BookFavourite;
+import com.stackroute.favouriteservice.model.UserBook;
 import com.stackroute.favouriteservice.repository.BookFavoriteRepository;
 
 /*
@@ -33,13 +35,15 @@ public class BookFavouriteServiceImpl implements BookFavouriteService {
 	}
 
 	@Override
-	public BookFavourite createFavourite(BookFavourite bookFavourite)
+	public BookFavourite createFavourite(UserBook userBook)
 			throws AlreadyFavouriteException, FavouriteNotCreatedException {
-		String userId = bookFavourite.getId();
+		String userId = userBook.getId();
 		Optional<BookFavourite> favourites = bookFavouriteRepository.findById(userId);
 		if(favourites.isPresent()) {
 			List<Book> favouritesList = favourites.get().getFavouritesList();
-			favouritesList.add(bookFavourite.getFavouritesList().get(0));
+			favouritesList.add(userBook.getBook());
+			BookFavourite bookFavourite = new BookFavourite();
+			bookFavourite.setId(userId);
 			bookFavourite.setFavouritesList(favouritesList);
 			BookFavourite createdRecomendation = bookFavouriteRepository.save(bookFavourite);
 			if(createdRecomendation != null) {
@@ -48,9 +52,14 @@ public class BookFavouriteServiceImpl implements BookFavouriteService {
 				throw new FavouriteNotCreatedException("Recommendation not created.");
 			}
 		}else {
-			BookFavourite createdRecomendation = bookFavouriteRepository.insert(bookFavourite);
-			if(createdRecomendation != null) {
-				return createdRecomendation;
+			List<Book> favouritesList = new ArrayList();
+			favouritesList.add(userBook.getBook());
+			BookFavourite bookFavourite = new BookFavourite();
+			bookFavourite.setId(userId);
+			bookFavourite.setFavouritesList(favouritesList);
+			BookFavourite createdFav = bookFavouriteRepository.insert(bookFavourite);
+			if(createdFav != null) {
+				return createdFav;
 			} else {
 				throw new FavouriteNotCreatedException("Recommendation not created.");
 			}

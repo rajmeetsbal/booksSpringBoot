@@ -22,6 +22,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import com.stackroute.favouriteservice.exception.FavouriteNotCreatedException;
 import com.stackroute.favouriteservice.model.Book;
 import com.stackroute.favouriteservice.model.BookFavourite;
+import com.stackroute.favouriteservice.model.UserBook;
 import com.stackroute.favouriteservice.service.BookFavouriteService;
 
 import io.swagger.annotations.Api;
@@ -62,10 +63,10 @@ public class BookFavouriteController {
 	
 	@ApiOperation(value = "Create favourite using post api url: /api/v1/favourites")
 	@PostMapping("/favourites")
-	public ResponseEntity<?> createFavourite(@RequestBody BookFavourite favourite) throws Exception {
+	public ResponseEntity<?> createFavourite(@RequestBody UserBook favourite) throws Exception {
 		try {
 			System.out.println("favourite "+favourite);
-			System.out.println("data : "+favourite.getId() + " " + favourite.getFavouritesList() );
+//			System.out.println("data : "+favourite.getId() + " " + favourite.getFavouritesList() );
 			BookFavourite createdFavourite = this.favouriteService.createFavourite(favourite);
 			return new ResponseEntity<>(createdFavourite, HttpStatus.CREATED);
 		} catch (FavouriteNotCreatedException e) {

@@ -32,7 +32,7 @@ public class FavouriteServiceApplication {
 		WebMvcConfigurer webConfigurer = new WebMvcConfigurerAdapter() {
 			@Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/v1").allowedOrigins("http://localhost:4200/*", "https://localhost:4200/*");
+                registry.addMapping("/api/v1").allowedOrigins("http://localhost:8765/*","http://localhost:8765/*","http://localhost:4200/*", "https://localhost:4200/*");
             }
 		};
 		return webConfigurer;

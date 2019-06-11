@@ -12,18 +12,22 @@ export const TOKEN_NAME: string = 'jwt_token';
 })
 export class AuthenticationService {
 
+	loggedIn:boolean = false;
 	token: string;
 
 	constructor(private httpClient: HttpClient) {
 		
 	}
 
+	// registerUser(newUser: User) {
+	// 	return this.httpClient.post('http://localhost:8083/api/v1/register', newUser, { responseType: 'text' });
+	// }
 	registerUser(newUser: User) {
-		return this.httpClient.post('http://localhost:8083/api/v1/register', newUser, { responseType: 'text' });
+		return this.httpClient.post('http://localhost:8765/userservice/api/v1/user', newUser, { responseType: 'text' });
 	}
 
 	loginUser(newUser) {
-		return this.httpClient.post('http://localhost:8083/api/v1/login', newUser);
+		return this.httpClient.post('http://localhost:8765/userservice/api/v1/login', newUser);
 	}
 
 	setToken(token: string) {

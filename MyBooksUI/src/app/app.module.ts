@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search/search.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
@@ -25,17 +25,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material';
+import { Jwt } from './services/Jwt';
 // import { MatFormField, MatFormFieldModule } from '@angular/material';
 // import { RouterService } from './services/router.service';
-// import { CanActivateRouteGuard } from './can-activate-route.guard';
+import { AuthGuard } from './can-activate-route.guard';
 
 const routes:Routes = [
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent},
-  {path:'recommended', component:RecommendedComponent},
-  {path:'favourites', component:FavouriteComponent},
-  {path:'search', component:SearchComponent},
-  {path:'',redirectTo:'search',pathMatch:'full'}
+  {path:'recommended', component:RecommendedComponent,canActivate:[AuthGuard]},
+  {path:'favourites', component:FavouriteComponent,canActivate:[AuthGuard]},
+  {path:'search', component:SearchComponent,canActivate:[AuthGuard]},
+  {path:'',redirectTo:'login',pathMatch:'full'}
 ]
 
 // const routes:Routes = [
@@ -85,7 +86,7 @@ const routes:Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Jwt, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

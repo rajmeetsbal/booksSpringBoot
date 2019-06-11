@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 		this.authService.loginUser(this.newUser).subscribe(data => {
 			if (data['token']) {
 				this.authService.setToken(data['token']);
+				this.authService.loggedIn = true;
 				this.router.navigate(['/search']);
 			}
 		});

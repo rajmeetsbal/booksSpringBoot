@@ -30,6 +30,7 @@ export class BookListItemComponent implements OnInit {
       this.fb.userId = "rajmeet";
       console.log("this.fb.userId "+this.fb.userId);
       this.fb.favouritesList[0] = this.book;
+      // this.fb.favouritesList[0] = {"title":this.book.title,"author_name":this.book.author_name[0]};
       this.bookService.addFav(this.fb).subscribe(addedBook => {
       }, error => {
         this.errorMessage = error.message;

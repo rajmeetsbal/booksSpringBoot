@@ -22,7 +22,7 @@ public class Book {
 	@Id
 	private int id;
 	private String title;
-	private String author_name;
+	private String[] author_name;
 	
 //	@DBRef
 //	private Category category;
@@ -36,7 +36,7 @@ public class Book {
 	public Book(int id, String title, String author_name) {
 		this.id = id;
 		this.title = title;
-		this.author_name = author_name;
+		this.author_name[0] = author_name;
 	}
 
 	public int getId() {
@@ -55,13 +55,23 @@ public class Book {
 		this.title = title;
 	}
 
-	public String getAuthor_name() {
+	public String[] getAuthor_name() {
 		return author_name;
 	}
 
-	public void setAuthor_name(String author_name) {
+	public void setAuthor_name(String[] author_name) {
 		this.author_name = author_name;
 	}
+	
+	
+//
+//	public String getAuthor_name() {
+//		return author_name;
+//	}
+//
+//	public void setAuthor_name(String author_name) {
+//		this.author_name = author_name;
+//	}
 
 	
 }

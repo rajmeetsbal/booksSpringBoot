@@ -12,17 +12,17 @@ export class RouterService {
     this.router.navigate(['login']);
   }
 
-  routeToDashboard(){
-    this.router.navigate(['dashboard']);
-  }
+  // routeToDashboard(){
+  //   this.router.navigate(['dashboard']);
+  // }
 
-  routeToEditView(noteId : number){
-    console.log('noteId inside Router',noteId);
+  // routeToEditView(noteId : number){
+  //   console.log('noteId inside Router',noteId);
     
-    this.router.navigate(['dashboard',{
-      outlets:{
-        noteEditOutlet : ['note',noteId,'edit']
-      }
-    }]);
-  }
+  //   this.router.navigate(['dashboard',{
+  //     outlets:{
+  //       noteEditOutlet : ['note',noteId,'edit']
+  //     }
+  //   }]);
+  // }
 }
