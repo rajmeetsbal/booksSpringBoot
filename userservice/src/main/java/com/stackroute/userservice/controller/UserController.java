@@ -69,9 +69,11 @@ public class UserController {
    				map.clear();
    				map.put("message", "User successfully loggedIn");
    				map.put("token", jwtToken);
+   				map.put("loggedInUser", user.getUserId());
    				if(!userIds.isEmpty()) {
    					map.put("userIds", userIds.toString());
    				}
+   				
    			} catch (Exception e) {
    				e.printStackTrace();
    				map.clear();
