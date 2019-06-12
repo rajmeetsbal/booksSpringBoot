@@ -8,7 +8,7 @@
            <!-- <span>{{book.isbn}}</span> -->
            <button class="detailsButton btn" (click)="openDialog()">Details</button>
            <!-- <mat-spinner class="loadingSpinner" id="loadSpin" ></mat-spinner> -->
-           <button class="detailsButton btn" (click)="addToFavs()">Add to favourites</button>
+           <button id="favButton{{book.isbn}}" class="detailsButton btn" (click)="addToFavs()">Add to favourites</button>
         </span> 
           
     </div>

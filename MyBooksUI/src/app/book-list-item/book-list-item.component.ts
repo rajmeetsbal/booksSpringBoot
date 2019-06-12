@@ -17,23 +17,29 @@ export class BookListItemComponent implements OnInit {
   @Input()
   book : Book;
   bookDetail : BookDetails;
+  // isFavourite : boolean;
 
-  fb : FavouriteBook;
+  // fb : FavouriteBook;
   errorMessage: string;
   
   constructor(private dialog : MatDialog, private bookService: BookService, private authService: AuthenticationService) {
-     this.fb = new FavouriteBook();
+    //  this.fb = new FavouriteBook();
+    //  this.isFavourite = true;
    }
 
   ngOnInit() {
+    
+    // this.isFavourite = true;
   }
 
   addToFavs() {
+    document.getElementById("favButton"+this.book.isbn).disabled = "true";
     // if (this.note.text && this.note.title) {
       // FavouriteBooks fb = new FavouriteBooks();
       // console.log("user " + this.authService.loggedInUser);
       // this.fb.userId = this.authService.loggedInUser;
       // console.log("this.fb.userId "+this.fb.userId);
+      // isFavourite = false;
       if(this.book.isbn){
         this.book.id=this.book.isbn[0];
       }
