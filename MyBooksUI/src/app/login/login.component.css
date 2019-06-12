@@ -21,3 +21,13 @@
 .login-user{
 	margin-right: 15px;
 }
+
+.login-input{
+	margin : 1px;
+	border-radius: 2px;
+}
+
+
+.btn-primary{
+	margin : 1px;
+}

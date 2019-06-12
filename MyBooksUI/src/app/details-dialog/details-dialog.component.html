@@ -1,23 +1,24 @@
+<img class="thumb-nail" src="{{bookDetails.thumbnail_url}}"/>
 <span class="bookTitle">
-   Title : {{book.title}}
+   Title : {{bookDetails.details.title}}
 </span>
 <span class="bookAuthor">
-    Author : {{book.author_name}}
+    Author : {{bookDetails.details.authors[0].name}}
 </span>
 <hr>
-<p>{{book.first_sentence}}</p>
+<p>{{bookDetails.details.subjects}}</p>
 <div class="bookPublisher">
-    First Published in : {{book.first_publish_year}}
+    First Published in : {{bookDetails.details.publish_date}}
 </div>
 <br>
 <div class="bookPublisher">
-    Published At : {{book.publish_place}}
+    Published At : {{bookDetails.details.publish_places}}
 </div>
+<!-- <div class="bookPublisher">
+    Genre : {{bookDetails.type}}
+</div> -->
 <div class="bookPublisher">
-    Genre : {{book.type}}
-</div>
-<div class="bookPublisher">
-    Publisher : {{book.publisher}}
+    Publisher : {{bookDetails.details.publishers}}
 </div>
 <div>
   <button class="closeBtn btn" (click)="closeDialog()">Close</button>

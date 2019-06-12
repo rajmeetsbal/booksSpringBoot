@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../book';
+import { BookDetails } from '../bookDetails';
 import { BookService } from '../services/bookService';
 import { MatDialog } from '@angular/material';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
@@ -15,6 +16,7 @@ export class BookListItemComponent implements OnInit {
 
   @Input()
   book : Book;
+  bookDetail : BookDetails;
 
   fb : FavouriteBook;
   errorMessage: string;
@@ -38,6 +40,7 @@ export class BookListItemComponent implements OnInit {
       // this.fb.book = this.book;
       // console.log("this.fb.book "+this.fb.book);
       this.bookService.addFav(this.authService.loggedInUser,this.book).subscribe(addedBook => {
+        
       }, error => {
         this.errorMessage = error.message;
       });
@@ -49,14 +52,48 @@ export class BookListItemComponent implements OnInit {
   
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DetailsDialogComponent, {
-      width: '450px',
-      height: '400px',
-      data: this.book
-      // data: {book: "sdsd"}
-      // data: {description: this.bookDetails.details, thumbnail_url: this.bookDetails.thumbnail_url}
-      // data: {description: "desc sample", thumbnail_url: "url samle"}
+
+    this.bookService.getBookDetail(this.book.isbn[0]).subscribe(bookDetail => {
+      console.log("resp using obser :  "+bookDetail);
+      console.log(bookDetail[this.book.isbn[0]]);
+      Object.keys(bookDetail).forEach(key => {
+        // if (bookDetail[key].index === 2) {
+            console.log("Found."+bookDetail[key]);
+            this.bookDetails = bookDetail[key];
+            // console.log("Found."+bookDetail[key].bib_key);
+        // }
+      });
+      // bookListResponse.docs.forEach(function(item){
+      //   if(item)
+      // });
+      // this.bookDetails = bookDetail;
+      const dialogRef = this.dialog.open(DetailsDialogComponent, {
+        width: '80%',
+        height: '80%',
+        data: this.bookDetails
+        // data: {book: "sdsd"}
+        // data: {description: this.bookDetails.details, thumbnail_url: this.bookDetails.thumbnail_url}
+        // data: {description: "desc sample", thumbnail_url: "url samle"}
+      });
+      // console.log("isbn returned : " + this.bookList[0].isbn);
+      // console.log("title data returned : " + this.bookList[0].bookTitle);
+      // console.log("author data returned : " + this.bookList[0].bookAuthor);
+      // console.log("author data returned : " + this.bookList[0].recommendedBy.length);
+      // document.getElementById("loadSpin").style.display = "none";
+    },
+    error => {
+      console.log("errror :  "+error.message);
+      this.errMessage = error.message;
     });
+
+    // const dialogRef = this.dialog.open(DetailsDialogComponent, {
+    //   width: '450px',
+    //   height: '400px',
+    //   data: this.book
+    //   // data: {book: "sdsd"}
+    //   // data: {description: this.bookDetails.details, thumbnail_url: this.bookDetails.thumbnail_url}
+    //   // data: {description: "desc sample", thumbnail_url: "url samle"}
+    // });
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');

@@ -17,3 +17,17 @@
 .header{
 	text-align: center;
 }
+
+.login-input{
+	margin : 1px;
+	border-radius: 2px;
+}
+
+
+.btn-primary{
+	margin : 15px;
+}
+
+mat-form-field{
+	display: block;
+}

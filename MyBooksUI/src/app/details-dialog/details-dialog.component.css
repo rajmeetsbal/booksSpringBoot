@@ -18,3 +18,11 @@
 .mat-dialog-container{
     background-color: beige;
 }
+
+.thumb-nail{
+
+    float: right;
+    margin: 15px;
+    height: 9em;
+
+}
