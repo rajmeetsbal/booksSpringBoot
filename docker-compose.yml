@@ -1,0 +1,109 @@
+# Dockerfile has been added in all micro-services, you need to dockerize all micro-services and add docker-compose.yml file
+
+  version: '2.1'
+  services:
+    user-auth:
+      image: rajmeetbal/userservice
+      build:
+        context: userservice/
+      restart: always
+      network_mode: host
+      depends_on:
+        - mysql
+        - eureka
+        - zuul
+      ports:
+        - 8083:8083
+      expose:
+        - 8083
+      healthcheck: 
+        test: "exit 0"
+
+    category-service:
+      image: rajmeetbal/book-recommendation
+      build:
+        context: book-recommendation/
+      restart: always
+      network_mode: host
+      depends_on:
+        - mongo
+        - eureka
+        - zuul
+      ports:
+        - 9400:9400
+      expose:
+        - 9400
+      healthcheck: 
+        test: "exit 0"
+        
+    reminder-service:
+      image: rajmeetbal/book-favourite
+      build:
+        context: book-favourite/
+      restart: always
+      network_mode: host
+      depends_on:
+        - mongo
+        - eureka
+        - zuul
+      ports:
+        - 9300:9300
+      expose:
+        - 9300
+      healthcheck: 
+        test: "exit 0"
+        
+    mysql:
+      image: mysql:5.5
+      restart: always
+      ports:
+        - 3306:3306
+      container_name: mysql
+      network_mode: host
+      environment:
+        MYSQL_ROOT_PASSWORD: root123
+        MYSQL_DATABASE: userDb
+        MYSQL_USER: app-root
+        MYSQL_PASSWORD: root123
+      healthcheck:
+        test: "exit 0"
+        
+    mongo:
+      image: mongo:latest
+      restart: always
+      ports:
+        - 27017:27017
+      expose:
+        - 27017
+      container_name: mongo
+      network_mode: host
+      healthcheck:
+        test: "exit 0"
+        
+    eureka:
+      build:
+        context: netflix-eureka-naming-server/
+      restart: always
+      image: rajmeetbal/eureka
+      network_mode: host
+      #environment:
+      #  eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+      #tty: false
+      ports:
+        - 8761:8761
+      expose:
+        - 8761
+        
+    zuul:
+      build:
+        context: netflix-zuul-api-gateway-server/
+      restart: always
+      image: rajmeetbal/zuul
+      network_mode: host
+      #environment:
+      #  eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+      #tty: false
+      ports:
+        - 8765:8765
+      expose:
+        - 8765
