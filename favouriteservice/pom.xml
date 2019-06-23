@@ -14,6 +14,7 @@
    	</parent>
 	<properties>
 		<java.version>1.8</java.version>
+		<!-- <maven.test.skip>true</maven.test.skip> -->
 	</properties>
 
 	<dependencies>
@@ -80,6 +81,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<excludes>
+						<exclude>com.stackroute.favouriteservice.controller.FavouriteControllerTest.java</exclude>
+					</excludes>
+				</configuration>
+		    </plugin>
 		</plugins>
 	</build>
 

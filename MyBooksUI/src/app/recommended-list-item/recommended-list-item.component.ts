@@ -16,7 +16,7 @@ export class RecommendedListItemComponent implements OnInit {
   constructor(private dialog : MatDialog) { }
 
   ngOnInit() {
-    console.log("this.book in rec  list item : "+this.book)
+    console.log("this.book in rec list item : "+this.book)
   }
 
   

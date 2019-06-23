@@ -33,12 +33,13 @@ export class BookListItemComponent implements OnInit {
   }
 
   addToFavs() {
-    document.getElementById("favButton"+this.book.isbn).disabled = "true";
+    // var favButton = document.getElementById("favButton"+this.book.isbn).disabled = "true";
+    (<HTMLInputElement> document.getElementById("favButton"+this.book.isbn)).disabled = true;
     // if (this.note.text && this.note.title) {
       // FavouriteBooks fb = new FavouriteBooks();
       // console.log("user " + this.authService.loggedInUser);
       // this.fb.userId = this.authService.loggedInUser;
-      // console.log("this.fb.userId "+this.fb.userId);
+      // console.log("this.fb.userId "+this.fb.userId); 
       // isFavourite = false;
       if(this.book.isbn){
         this.book.id=this.book.isbn[0];
@@ -65,7 +66,7 @@ export class BookListItemComponent implements OnInit {
       Object.keys(bookDetail).forEach(key => {
         // if (bookDetail[key].index === 2) {
             console.log("Found."+bookDetail[key]);
-            this.bookDetails = bookDetail[key];
+            this.bookDetail = bookDetail[key];
             // console.log("Found."+bookDetail[key].bib_key);
         // }
       });
@@ -76,7 +77,7 @@ export class BookListItemComponent implements OnInit {
       const dialogRef = this.dialog.open(DetailsDialogComponent, {
         width: '80%',
         height: '80%',
-        data: this.bookDetails
+        data: this.bookDetail
         // data: {book: "sdsd"}
         // data: {description: this.bookDetails.details, thumbnail_url: this.bookDetails.thumbnail_url}
         // data: {description: "desc sample", thumbnail_url: "url samle"}
@@ -89,7 +90,7 @@ export class BookListItemComponent implements OnInit {
     },
     error => {
       console.log("errror :  "+error.message);
-      this.errMessage = error.message;
+      this.errorMessage = error.message;
     });
 
     // const dialogRef = this.dialog.open(DetailsDialogComponent, {

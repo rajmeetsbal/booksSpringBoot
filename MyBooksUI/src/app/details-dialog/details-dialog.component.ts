@@ -23,10 +23,10 @@ export class DetailsDialogComponent implements OnInit {
       // this.isbn = data.title;
       this.bookDetails = data;
       
-      console.log("data in dialog is : " + this.bookDetails.details.title);
-      console.log("data in dialog is : " + this.bookDetails.thumbnail_url);
-      this.title = this.bookDetails.details.title;
-      console.log("data in dialog is : " + this.title);
+      // console.log("data in dialog is : " + this.bookDetails.details.title);
+      // console.log("data in dialog is : " + this.bookDetails.thumbnail_url);
+      // this.title = this.bookDetails.details.title;
+      // console.log("data in dialog is : " + this.title);
       // this.isbnId = data.isbnId;
     }
 
