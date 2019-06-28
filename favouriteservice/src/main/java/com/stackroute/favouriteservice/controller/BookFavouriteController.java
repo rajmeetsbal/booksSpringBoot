@@ -70,7 +70,7 @@ public class BookFavouriteController {
 	@PostMapping("/favourites/{id}")
 	public ResponseEntity<?> createFavourite(@PathVariable("id") String userId,@RequestBody Book book) throws Exception {
 		try {
-			System.out.println("favourite "+book);
+//			System.out.println("favourite "+book);
 //			System.out.println("data : "+favourite.getId() + " " + favourite.getFavouritesList() );
 			UserBook ub = new UserBook();
 			ub.setId(userId);

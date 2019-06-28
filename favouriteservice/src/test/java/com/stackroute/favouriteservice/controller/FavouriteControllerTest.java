@@ -5,7 +5,6 @@ import com.stackroute.favouriteservice.controller.BookFavouriteController;
 import com.stackroute.favouriteservice.exception.FavouriteNotCreatedException;
 import com.stackroute.favouriteservice.model.Book;
 import com.stackroute.favouriteservice.model.BookFavourite;
-import com.stackroute.favouriteservice.model.BookRecomendation;
 import com.stackroute.favouriteservice.service.BookFavouriteService;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public class FavouriteControllerTest {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(bookFavouriteController).build();
         bookFavourite = new BookFavourite();
-        bookFavourite.setId("user1");
+        bookFavourite.setId("rajmeet");
         List<Book> favouritesList = new ArrayList<Book>();
         Book one = new Book();
         one.setId(5472579);
@@ -69,10 +69,10 @@ public class FavouriteControllerTest {
     }
 
 //    @Test
-//    public void createBookRecomendationSuccess() throws Exception {
+//    public void createFavouriteSuccess() throws Exception {
 //
 //        when(bookFavouriteService.createFavourite(any())).thenReturn(bookFavourite);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/favourites/user1")
+//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/favourites/rajmeet")
 //                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(bookFavourite)))
 //                .andExpect(MockMvcResultMatchers.status().isCreated())
 //                .andDo(MockMvcResultHandlers.print());
@@ -80,7 +80,7 @@ public class FavouriteControllerTest {
 //    }
 //
 //    @Test
-//    public void getBookRecomendationByIdSuccess() throws Exception {
+//    public void getFavouriteByIdSuccess() throws Exception {
 //        when(bookFavouriteService.getAllFavoritesByUser(bookFavourite.getId())).thenReturn(allBooks);
 //        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/favourites/user1")
 //                .contentType(MediaType.APPLICATION_JSON))
@@ -89,13 +89,16 @@ public class FavouriteControllerTest {
 //
 //
 //    @Test
-//    public void getBookRecomendationByIdFailure() throws Exception {
+//    public void getFavouriteByIdFailure() throws Exception {
 //        when(bookFavouriteService.getAllFavoritesByUser(bookFavourite.getId())).thenThrow(FavouriteNotCreatedException.class);
 //        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/favourites/user1")
 //                .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(MockMvcResultMatchers.status().isNotFound());
 //    }
-
+    
+    public void getFavs() {
+    	assertEquals(allFavourites.get(0).getFavouritesList().get(0).getTitle(), "Zen speaks");
+    }
 
 
     private static String asJsonString(final Object obj) {

@@ -52,7 +52,7 @@ public class BookFavouriteServiceImpl implements BookFavouriteService {
 				throw new FavouriteNotCreatedException("Favourite not created.");
 			}
 		}else {
-			List<Book> favouritesList = new ArrayList();
+			List<Book> favouritesList = new ArrayList<Book>();
 			favouritesList.add(userBook.getBook());
 			BookFavourite bookFavourite = new BookFavourite();
 			bookFavourite.setId(userId);

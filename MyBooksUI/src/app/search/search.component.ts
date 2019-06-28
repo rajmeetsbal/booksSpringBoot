@@ -49,6 +49,9 @@ export class SearchComponent implements OnInit {
     document.getElementById("selectTitle").setAttribute("selected","true");
     if(this.searchString.length > 3){
       document.getElementById("loadSpin").style.display = "block";
+      if(!this.searchBy){
+        this.searchBy = 'title';
+      }
       this.bookService.getBooks(this.searchString,this.searchBy).subscribe(bookListResponse => {
         // console.log("resp using obser :  "+bookListResponse);
         // bookListResponse.docs.forEach(function(item){

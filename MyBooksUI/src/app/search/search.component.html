@@ -27,7 +27,7 @@
                     </select>
               </div>
               <div class="col-md-6">
-                  <input [(ngModel)]="searchString" (keyup)="getSearchedBooks(this.value)" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                  <input id="searchInput" [(ngModel)]="searchString" (keyup)="getSearchedBooks(this.value)" class="form-control" type="text" placeholder="Search" aria-label="Search">
               </div>
               
               <div class="col-md-2"></div>
