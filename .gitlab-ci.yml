@@ -16,3 +16,17 @@
     artifacts:
       paths:
         - target/*.jar
+
+  variables:
+    MYSQL_DATABASE: "mybooksusersdb"
+    MYSQL_USER: "root"
+    MYSQL_PASSWORD: "root"
+    MYSQL_ROOT_PASSWORD: "root"
+    MYSQL_URL: jdbc:mysql://mysql/mybooksusersdb?createDatabaseIfNotExist=true"
+    #MONGO_DATABASE: "??"
+    #MONGO_HOST: "mongo"
+    #MONGO_PORT: "27017"
+  cache:
+    paths:
+      - .m2/repository
+      - target
