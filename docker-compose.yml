@@ -2,7 +2,7 @@
 
   version: '2.1'
   services:
-    user-auth:
+    userservice:
       image: rajmeetbal/userservice
       build:
         context: userservice/
@@ -19,7 +19,7 @@
       healthcheck: 
         test: "exit 0"
 
-    category-service:
+    book-recommendation:
       image: rajmeetbal/book-recommendation
       build:
         context: book-recommendation/
@@ -36,7 +36,7 @@
       healthcheck: 
         test: "exit 0"
         
-    reminder-service:
+    book-favourite:
       image: rajmeetbal/book-favourite
       build:
         context: book-favourite/
